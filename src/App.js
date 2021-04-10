@@ -9,7 +9,7 @@ const api = axios.create({
 });
 
 function App() {
-  const [user, setUser] = useState({ login: false });
+  const [user, setUser] = useState({ authenticated: false });
   const [formData, setFormData] = useState({ email: '', password: '' });
 
   const handaleChangeInputs = (value, propertyName) => {
@@ -35,7 +35,7 @@ function App() {
           return {
             ...prevState,
             ...currentUser,
-            login: true,
+            authenticated: true,
           };
         });
       } else {
@@ -46,7 +46,7 @@ function App() {
 
   return (
     <div className='App'>
-      {user.login ? (
+      {user.authenticated ? (
         <Contacts {...user} />
       ) : (
         <Login
