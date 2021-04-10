@@ -1,21 +1,22 @@
-export const Login = () => {
+export const Login = ({change}) => {
   return (
     <form>
       <label>
         Email
         <input
-          onChange={(event) => console.log(`email: ${event.target.value}`)}
+          name='email'
+          onChange={(event) => change(event.target.value, event.target.name)}
           type='text'
         />
       </label>
       <label>
         Password
         <input
-          onChange={(event) => console.log(`password: ${event.target.value}`)}
+          onChange={(event) => change(event.target.value, event.target.name)}
           type='text'
         />
       </label>
-      <input type='submit' value='Submit' />
+      <input type='submit' value='Submit'/>
     </form>
   );
 };

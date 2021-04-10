@@ -8,18 +8,21 @@ function App() {
   const [formData, setFormData] = useState({});
 
   const handaleChangeInputs = (value, propertyName) => {
-    setFormData(prevState => {
+    setFormData((prevState) => {
       return {
         ...prevState,
-        [propertyName]: value
-      }
-    })
-  }
+        [propertyName]: value,
+      };
+    });
+  };
+
+  const sumbitForm = () => {
+    
+  };
 
   return (
     <div className='App'>
       {user.login ? <Contacts /> : <Login change={handaleChangeInputs} />}
-      <Login />
     </div>
   );
 }
