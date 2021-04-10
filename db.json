@@ -1,0 +1,69 @@
+{
+  "users": [
+    {
+      "name": "Jesse",
+      "email": "jesse@comcast.net",
+      "password": 12345,
+      "contacts": [
+        { "name": "Salem", "phone": 79990432399 },
+        { "name": "Vasya", "phone": 799980034902  },
+        { "name": "Violet", "phone": 75435654356  },
+        { "name": "Manley", "phone": 76546764286 },
+        { "name": "Euphemia", "phone": 76743802702  },
+        { "name": "Sky", "phone": 76267052941 }
+      ]
+    },
+    {
+      "name": "Makar",
+      "email": "jonathan@yahoo.ca",
+      "password": 12345,
+      "contacts": [
+        { "name": "Kat", "phone": 79890896801 },
+        { "name": "Gyles", "phone": 73051484712 },
+        { "name": "Shaye", "phone": 72000303210},
+        { "name": "Larisa", "phone": 75515563264 },
+        { "name": "Toby", "phone": 74236020560 },
+        { "name": "Tamsin", "phone": 75875087157 }
+      ]
+    },
+    {
+      "name": "Igor",
+      "email": "avalon@yahoo.ca",
+      "password": 12345,
+      "contacts": [
+        { "name": "Delia", "phone": 76388487613 },
+        { "name": "Euphemia", "phone": 76027160812 },
+        { "name": "Jemma", "phone": 75556559404 },
+        { "name": "Pamelia", "phone": 76401257690 },
+        { "name": "Tawny", "phone": 74332593410 },
+        { "name": "Lawrence", "phone": 73879099043 }
+      ]
+    },
+    {
+      "name": "Aksinya",
+      "email": "mkearl@gmail.com",
+      "password": 12345,
+      "contacts": [
+        { "name": "Quinten", "phone": 73737235350 },
+        { "name": "Elvina", "phone": 76998920636},
+        { "name": "Freeman", "phone": 72799714318 },
+        { "name": "Elfrida", "phone": 74635521902 },
+        { "name": "Vickie", "phone": 76873958163 },
+        { "name": "Spirit", "phone": 76131951149 }
+      ]
+    },
+    {
+      "name": "Quintin",
+      "email": "moxfulder@icloud.com",
+      "password": 12345,
+      "contacts": [
+        { "name": "Cullen", "phone": 77570723207 },
+        { "name": "Odin", "phone": 75233597245 },
+        { "name": "Joey", "phone": 77428899243 },
+        { "name": "Kassy", "phone": 75765762582},
+        { "name": "Antony", "phone": 73131975635},
+        { "name": "Lyndsey", "phone": 72287256665 }
+      ]
+    }
+  ]
+}
