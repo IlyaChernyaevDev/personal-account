@@ -3,6 +3,7 @@ import './App.css';
 import { Login } from './componetns/Login/';
 import { Contacts } from './componetns/Contacts/';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const api = axios.create({
   baseURL: 'http://localhost:3001/users',
@@ -44,19 +45,70 @@ function App() {
     });
   };
 
+  
+
   return (
-    <div className='App'>
-      {user.authenticated ? (
-        <Contacts {...user} />
-      ) : (
-        <Login
-          change={handaleChangeInputs}
-          submit={sumbitFormHandler}
-          {...formData}
-        />
-      )}
-    </div>
+    <Router>
+      <div className='App'>
+        <Switch>
+          <Route exact path='/'>
+            <Login
+              change={handaleChangeInputs}
+              submit={sumbitFormHandler}
+              {...formData}
+            />
+          </Route>
+          {user.authenticated && (
+            <Route path='/contacts'>
+              <Contacts {...user} />
+            </Route>
+          )}
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
 export default App;
+
+// {
+//   /* <Login
+//   path='/'
+// change={handaleChangeInputs}
+// submit={sumbitFormHandler}
+// {...formData}
+// /> */
+// }
+// <Route
+//   exact
+//   path='/'
+//   render={() => {
+//     return (
+//       <Login
+//         change={handaleChangeInputs}
+//         submit={sumbitFormHandler}
+//         {...formData}
+//       />
+//     );
+//   }}
+// />;
+// {
+//   /* {user.authenticated ? (
+//   <Contacts {...user} />
+// ) : (
+//   <Login
+//     change={handaleChangeInputs}
+//     submit={sumbitFormHandler}
+//     {...formData}
+//   />
+// )} */
+// }
+// {
+//   user.authenticated && (
+//     <Route
+//       exact
+//       path='/contacts'
+//       render={() => <Contacts {...user} />}
+//     />
+//   );
+// }

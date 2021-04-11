@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { Contact } from './Contact';
 
 export const Contacts = ({ name, email, password, contacts }) => {
   return (
@@ -10,9 +11,7 @@ export const Contacts = ({ name, email, password, contacts }) => {
       <button onClick={() => console.log('Log out')}>Log out</button>
       {contacts.map((contact) => {
         return (
-          <p key={uuidv4()}>
-            Имя: {contact.name} Телефон: {contact.phone}
-          </p>
+          <Contact key={uuidv4()} name={contact.name} phone={contact.phone} />
         );
       })}
     </div>
