@@ -1,71 +1,46 @@
 import { useState } from 'react';
-import './App.css';
 import { Login } from './componetns/Login/';
 import { Contacts } from './componetns/Contacts/';
+import { Error } from './componetns/Contacts/Error';
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
-import { getUsers } from './actions/userActions';
+
 import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  app: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginTop: '64px',
+  },
+}));
 
 function App() {
+  const classes = useStyles();
   const [currentUser, setCurrentUser] = useState({ authenticated: false });
-  const [formData, setFormData] = useState({ email: '', password: '' });
-
-  const handaleChangeInputs = (value, propertyName) => {
-    setFormData((prevState) => {
-      return {
-        ...prevState,
-        [propertyName]: value,
-      };
-    });
-  };
-
-  const sumbitFormHandler = (event) => {
-    event.preventDefault();
-    getUsers().then((users) => {
-      let user = users.find(
-        (user) =>
-          user.email === formData.email && user.password === +formData.password
-      );
-      console.log(user);
-      if (user) {
-        setCurrentUser(() => {
-          return {
-            ...user,
-            authenticated: true,
-          };
-        });
-      } else {
-        console.log('Такого пользователя нет');
-      }
-    });
-  };
 
   return (
     <Router>
-      <Container component='main' maxWidth='xs'>
+      <Container component='main' maxWidth='xs' className={classes.app}>
         <Switch>
           <Route exact path='/'>
             {currentUser.authenticated ? (
               <Redirect to='/contacts' />
             ) : (
-              <Login
-                change={handaleChangeInputs}
-                submit={sumbitFormHandler}
-                {...formData}
-                authenticated={currentUser.authenticated}
-              />
+              <Login authenticated={currentUser.authenticated} setCurrentUser={setCurrentUser} />
             )}
           </Route>
           <Route path='/contacts'>
             {currentUser.authenticated ? (
               <Contacts {...currentUser} />
             ) : (
-              <div>Error</div>
+              <Error />
             )}
           </Route>
         </Switch>
