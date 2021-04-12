@@ -46,7 +46,6 @@ export const Login = ({ change, submit, email, password }) => {
             fullWidth
             id='email'
             label='Email Address'
-            name='email'
             autoComplete='email'
             autoFocus
             value={email}
@@ -59,7 +58,6 @@ export const Login = ({ change, submit, email, password }) => {
             margin='normal'
             required
             fullWidth
-            name='password'
             label='Password'
             type='password'
             id='password'
@@ -67,7 +65,6 @@ export const Login = ({ change, submit, email, password }) => {
             value={password}
             name='password'
             onChange={(event) => change(event.target.value, event.target.name)}
-            type='text'
           />
           <Button
             type='submit'
