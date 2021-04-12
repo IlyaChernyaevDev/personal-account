@@ -19,7 +19,13 @@ export const Login = ({ change, submit, email, password }) => {
           type='text'
         />
       </label>
-      <input type='submit' value='Submit' onClick={submit} />
+      <input
+        type='submit'
+        value='Submit'
+        onClick={(event) => {
+          submit(event);
+        }}
+      />
     </form>
   );
 };

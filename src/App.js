@@ -2,15 +2,16 @@ import { useState } from 'react';
 import './App.css';
 import { Login } from './componetns/Login/';
 import { Contacts } from './componetns/Contacts/';
-import axios from 'axios';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-const api = axios.create({
-  baseURL: 'http://localhost:3001/users',
-});
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import { getUsers } from './actions/userActions';
 
 function App() {
-  const [user, setUser] = useState({ authenticated: false });
+  const [currentUser, setCurrentUser] = useState({ authenticated: false });
   const [formData, setFormData] = useState({ email: '', password: '' });
 
   const handaleChangeInputs = (value, propertyName) => {
@@ -24,18 +25,16 @@ function App() {
 
   const sumbitFormHandler = (event) => {
     event.preventDefault();
-    api.get('/').then((res) => {
-      let users = res.data;
-      let currentUser = users.find(
+    getUsers().then((users) => {
+      let user = users.find(
         (user) =>
           user.email === formData.email && user.password === +formData.password
       );
-      if (currentUser) {
-        setUser((prevState) => {
-          console.log(currentUser);
+      console.log(user);
+      if (user) {
+        setCurrentUser(() => {
           return {
-            ...prevState,
-            ...currentUser,
+            ...user,
             authenticated: true,
           };
         });
@@ -45,24 +44,29 @@ function App() {
     });
   };
 
-  
-
   return (
     <Router>
       <div className='App'>
         <Switch>
           <Route exact path='/'>
-            <Login
-              change={handaleChangeInputs}
-              submit={sumbitFormHandler}
-              {...formData}
-            />
+            {currentUser.authenticated ? (
+              <Redirect to='/contacts' />
+            ) : (
+              <Login
+                change={handaleChangeInputs}
+                submit={sumbitFormHandler}
+                {...formData}
+                authenticated={currentUser.authenticated}
+              />
+            )}
           </Route>
-          {user.authenticated && (
-            <Route path='/contacts'>
-              <Contacts {...user} />
-            </Route>
-          )}
+          <Route path='/contacts'>
+            {currentUser.authenticated ? (
+              <Contacts {...currentUser} />
+            ) : (
+              <div>Error</div>
+            )}
+          </Route>
         </Switch>
       </div>
     </Router>
@@ -70,45 +74,3 @@ function App() {
 }
 
 export default App;
-
-// {
-//   /* <Login
-//   path='/'
-// change={handaleChangeInputs}
-// submit={sumbitFormHandler}
-// {...formData}
-// /> */
-// }
-// <Route
-//   exact
-//   path='/'
-//   render={() => {
-//     return (
-//       <Login
-//         change={handaleChangeInputs}
-//         submit={sumbitFormHandler}
-//         {...formData}
-//       />
-//     );
-//   }}
-// />;
-// {
-//   /* {user.authenticated ? (
-//   <Contacts {...user} />
-// ) : (
-//   <Login
-//     change={handaleChangeInputs}
-//     submit={sumbitFormHandler}
-//     {...formData}
-//   />
-// )} */
-// }
-// {
-//   user.authenticated && (
-//     <Route
-//       exact
-//       path='/contacts'
-//       render={() => <Contacts {...user} />}
-//     />
-//   );
-// }
