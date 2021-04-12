@@ -9,6 +9,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { getUsers } from './actions/userActions';
+import Container from '@material-ui/core/Container';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ authenticated: false });
@@ -46,7 +47,7 @@ function App() {
 
   return (
     <Router>
-      <div className='App'>
+      <Container component='main' maxWidth='xs'>
         <Switch>
           <Route exact path='/'>
             {currentUser.authenticated ? (
@@ -68,7 +69,7 @@ function App() {
             )}
           </Route>
         </Switch>
-      </div>
+      </Container>
     </Router>
   );
 }
